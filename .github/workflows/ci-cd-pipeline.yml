@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: my-library-package
-        path: ./nupkgs/*.nupkg 
+        path: ./nupkgs/*.nupkg #я не понимаю как исправить ошибку
