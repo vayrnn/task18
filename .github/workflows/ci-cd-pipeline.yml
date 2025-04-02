@@ -1,1 +1,40 @@
+name: CI/CD Pipeline for .NET Library
 
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0'
+
+    - name: Restore dependencies
+      run: dotnet restore  # Восстанавливаем зависимости
+
+    - name: Build the project
+      run: dotnet build --configuration Release
+
+    - name: Run tests
+      run: dotnet test --configuration Release 
+
+    - name: Pack the library
+      run: dotnet pack --configuration Release --output ./nupkgs 
+
+    - name: Upload NuGet package
+      uses: actions/upload-artifact@v2
+      with:
+        name: my-library-package
+        path: ./nupkgs/*.nupkg 
