@@ -22,7 +22,7 @@ jobs:
         dotnet-version: '6.0'
 
     - name: Restore dependencies
-      run: dotnet restore  # Восстанавливаем зависимости
+      run: dotnet restore 
 
     - name: Build the project
       run: dotnet build --configuration Release
